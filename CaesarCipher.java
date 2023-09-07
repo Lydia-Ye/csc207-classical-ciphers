@@ -22,16 +22,7 @@ public class CaesarCipher {
     String instruction = args[0];
     String message = args[1];
 
-    if (instruction.equals("encode")) {
-      printResult(message);
-    } 
-    /* 
-    else if (instruction.equals("decode")) {
-      String result = decode(message);
-    } // if
-*/
-
-
+    printResult(message, instruction);
   } // main(String[])
 
   public static String encode(String message, int n) {
@@ -43,17 +34,34 @@ public class CaesarCipher {
     } // for
 
     String encodedMessage = new String(encoded_ch);
-
     return encodedMessage;
-
   } // encode
 
-  public static void printResult(String message) {
+  public static String decode(String message, int n) {
+    char[] ch = message.toCharArray();  // array of letters to be encrypt
+    char[] decoded_ch = new char[message.length()];
+
+    for (int i = 0; i < message.length(); i++){
+      decoded_ch[i] = (char) ('a' + ((ch[i] - 'a' - n) + 26)% 26);
+    } // for
+
+    String decodedMessage = new String(decoded_ch);
+    return decodedMessage;
+  } // decode
+
+  public static void printResult(String message, String instruction) {
     PrintWriter pen = new PrintWriter(System.out, true);
     int n = 0;    // value of key to encrypt/decrpt the letter with
-    for (n = 0; n <= 25; n++) {
-      pen.println("n = " + n + ": " + encode(message, n));
-    } // for
+    
+    if (instruction.equals("encode")) {
+      for (n = 0; n <= 25; n++) {
+        pen.println("n = " + n + ": " + encode(message, n));
+      } // for
+    } else if (instruction.equals("decode")) {
+      for (n = 0; n <= 25; n++) {
+        pen.println("n = " + n + ": " + decode(message, n));
+      } // for
+    } // if
     pen.flush();
   } // printResult;
 

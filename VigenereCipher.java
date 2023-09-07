@@ -30,13 +30,11 @@ public class VigenereCipher {
     if (instruction.equals("encode")) {
       result = encode(message, keyword);
       pen.println(result);
-    } 
-    /* 
-    else if (instruction.equals("decode")) {
-      result = decode(message, key);
-      pen.prinln("result");
+    } else if (instruction.equals("decode")) {
+      result = decode(message, keyword);
+      pen.println(result);
     } // if
-*/
+
   } // main(String[])
 
   public static String encode(String message, String keyword) {
@@ -47,11 +45,24 @@ public class VigenereCipher {
     for (int i = 0; i < message.length(); i++) {
       int n =  i % keyword.length();
       encoded_ch[i] = (char) ('a' + ((ch[i] - 'a') + (key[n] - 'a')) % 26);
-    }
+    } // for
 
     String encodedMessage = new String(encoded_ch);
     return encodedMessage;
-
   } // encode
+
+  public static String decode(String message, String keyword) {
+    char[] ch = message.toCharArray();  // array of letters to be encrypt
+    char[] decoded_ch = new char[message.length()];
+    char[] key = keyword.toCharArray();
+
+    for (int i = 0; i < message.length(); i++) {
+      int n =  i % keyword.length();
+      decoded_ch[i] = (char) ('a' + ((ch[i] - 'a') - (key[n] - 'a') + 26 ) % 26);
+    } // for
+
+    String decodedMessage = new String(decoded_ch);
+    return decodedMessage;
+  } // decode
 
 } // class VigenereCipher
