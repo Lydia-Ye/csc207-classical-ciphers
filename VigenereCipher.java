@@ -5,8 +5,6 @@ import java.io.PrintWriter;
  *
  * @author Lydia Ye
  */
-
-
 public class VigenereCipher {
   public static void main(String[] args) throws Exception{
     PrintWriter pen = new PrintWriter(System.out, true);
@@ -22,11 +20,13 @@ public class VigenereCipher {
       System.exit(2);
     } // if
 
+    // Get instruction, message, and keyword from command line arguments
     String instruction = args[0];
     String message = args[1];
     String keyword = args[2];
     String result;
 
+    // Print result
     if (instruction.equals("encode")) {
       result = encode(message, keyword);
       pen.println(result);
@@ -34,35 +34,45 @@ public class VigenereCipher {
       result = decode(message, keyword);
       pen.println(result);
     } // if
-
   } // main(String[])
 
+
+  /**
+   * Encode message with input keyword
+   */
   public static String encode(String message, String keyword) {
     char[] ch = message.toCharArray();  // array of letters to be encrypt
     char[] encoded_ch = new char[message.length()];
     char[] key = keyword.toCharArray();
 
+    // Encode each single letter of message with keyword
     for (int i = 0; i < message.length(); i++) {
       int n =  i % keyword.length();
       encoded_ch[i] = (char) ('a' + ((ch[i] - 'a') + (key[n] - 'a')) % 26);
     } // for
 
+    // Convert array into string
     String encodedMessage = new String(encoded_ch);
     return encodedMessage;
   } // encode
 
+
+  /**
+   * Decode message with input keyword
+   */
   public static String decode(String message, String keyword) {
     char[] ch = message.toCharArray();  // array of letters to be encrypt
     char[] decoded_ch = new char[message.length()];
     char[] key = keyword.toCharArray();
 
+    // Decode each single letter of message with keyword
     for (int i = 0; i < message.length(); i++) {
       int n =  i % keyword.length();
       decoded_ch[i] = (char) ('a' + ((ch[i] - 'a') - (key[n] - 'a') + 26 ) % 26);
     } // for
 
+    // Convert array into string
     String decodedMessage = new String(decoded_ch);
     return decodedMessage;
   } // decode
-
 } // class VigenereCipher
