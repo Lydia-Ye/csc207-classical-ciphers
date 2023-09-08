@@ -1,5 +1,5 @@
-Name: Lydia Ye
-Date: Sept. 7 2023
+Name: Lydia Ye  <br>
+Date: Sept. 7 2023  <br>
 
 This repository contans CaesarCipher and VigenereCipher programs that encode or decode message taken from command line arguments through Caesar Cipher scheme or Vigenere Cipher scheme.  <br>
 
